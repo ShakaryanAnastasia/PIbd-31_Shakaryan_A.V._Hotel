@@ -1,0 +1,17 @@
+<a routerLink="/admin/add" routerLinkActive = "active"><button>Добавить</button></a>
+<table id="d" border='1' width='50%'>
+    <tr>
+      <th>ID</th>
+      <th>TITLE</th>
+      <th>Price</th>
+      <th>Description</th>
+    </tr>
+    
+    <tr *ngFor="let room of rooms">
+      <td>{{ room.id }}</td>
+      <td>{{ room.title }}</td>
+      <td>{{ room.price }}</td>
+      <td>{{ room.description }}</td>
+    </tr>  
+  </table>
+

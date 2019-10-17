@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+        "target": "http://localhost/PIbd-31_Shakaryan_A.V._Backend/public/api",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite":{
+            "^/api": ""
+        }
+    }
+}

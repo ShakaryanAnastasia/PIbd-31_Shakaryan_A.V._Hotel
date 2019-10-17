@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './StartComponent/app.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { HomeComponent } from './home/home.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddComponent } from './admin/add/add.component';
 
 
 const routes: Routes = [
   { path: 'home',  component: HomeComponent },
+  { path: 'admin',  component: AdminComponent },
+  { path: 'admin/add',  component: AddComponent },
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'rooms',  loadChildren: './rooms/rooms.module#RoomsModule' },
   ];
