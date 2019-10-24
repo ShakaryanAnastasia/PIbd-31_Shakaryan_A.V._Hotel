@@ -16,36 +16,38 @@ export class RoomsService{
         this.handleError = httpErrorHandler.createHandlerError('RoomsService')
     }
 
+    link: string = 'https://iphotelbackend.herokuapp.com/';
+
     getRooms(): Observable<any> {
         return this.http
-            .get('api/rooms')
+            .get(this.link + 'api/rooms')
             .pipe(catchError(this.handleError('getRooms')))
     }
 
     getRoom(id: number): Observable<any> {
         const url = 'api/rooms/' + id;
         return this.http
-            .get(url)
+            .get(this.link + url)
             .pipe(catchError(this.handleError('getRoom', id)))
     }
 
     addRoom(room: Room): Observable<any> {
         return this.http
-            .post('api/rooms', room)
+            .post(this.link + 'api/rooms', room)
             .pipe(catchError(this.handleError('addRoom', room)))
     }
 
     deleteRoom(id: number): Observable<any> {
         const url = 'api/rooms/' + id;
         return this.http
-            .delete(url)
+            .delete(this.link + url)
             .pipe(catchError(this.handleError('deleteRoom', id)))
     }
 
     updateRoom(room: Room): Observable<any> {
         const url = 'api/rooms/' + room.id;
         return this.http
-            .put(url, room)
+            .put(this.link + url, room)
             .pipe(catchError(this.handleError('updateRoom', room)))
     }
 
