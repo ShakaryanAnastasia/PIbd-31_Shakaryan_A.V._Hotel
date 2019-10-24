@@ -10,6 +10,8 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import {RoomsService} from './admin/room.service'
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 
 import { RoomsComponent } from './rooms/rooms.component';
 import { HomeComponent } from './home/home.component';
@@ -21,14 +23,16 @@ import { AddComponent } from './admin/add/add.component';
     AppComponent,
     HomeComponent,
     AdminComponent,
-    AddComponent
+    AddComponent,
+    RoomsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule, 
+    CKEditorModule
   ],
   providers: [MessageService, HttpErrorHandler, RoomsService],
   bootstrap: [AppComponent]

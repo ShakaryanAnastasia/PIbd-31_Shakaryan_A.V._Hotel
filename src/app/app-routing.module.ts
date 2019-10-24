@@ -11,8 +11,10 @@ const routes: Routes = [
   { path: 'home',  component: HomeComponent },
   { path: 'admin',  component: AdminComponent },
   { path: 'admin/add',  component: AddComponent },
+  { path: 'admin/edit/:id', component: AddComponent , data:{mode:"edit"}},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'rooms',  loadChildren: './rooms/rooms.module#RoomsModule' },
+  //{ path: 'rooms',  loadChildren: './rooms/rooms.module#RoomsModule' },
+  { path: 'rooms',  component: RoomsComponent }
   ];
 
 @NgModule({

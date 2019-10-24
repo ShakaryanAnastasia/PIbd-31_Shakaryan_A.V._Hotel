@@ -16,28 +16,37 @@ export class RoomsService{
         this.handleError = httpErrorHandler.createHandlerError('RoomsService')
     }
 
-    getRooms(): Observable<Room[]>{
+    getRooms(): Observable<any> {
         return this.http
-        .get<Room[]>('api/rooms')
-        .pipe(catchError(this.handleError('getRooms', [])))
+            .get('api/rooms')
+            .pipe(catchError(this.handleError('getRooms')))
     }
 
-    addRoom(room: Room): Observable<Room>{
+    getRoom(id: number): Observable<any> {
+        const url = 'api/rooms/' + id;
         return this.http
-        .post<Room>('api/room', room)
-        .pipe(catchError(this.handleError('addRoom', room)))
+            .get(url)
+            .pipe(catchError(this.handleError('getRoom', id)))
     }
 
-    deleteRoom(id: number): Observable<{}>{
-        const url = 'api/room/${id}'
+    addRoom(room: Room): Observable<any> {
         return this.http
-        .delete(url)
-        .pipe(catchError(this.handleError('deleteRoom')))
+            .post('api/rooms', room)
+            .pipe(catchError(this.handleError('addRoom', room)))
     }
 
-    updateRoom(room: Room): Observable<Room>{        
+    deleteRoom(id: number): Observable<any> {
+        const url = 'api/rooms/' + id;
         return this.http
-        .put<Room>('api/room/${room.id}', room)
-        .pipe(catchError(this.handleError('updateRoom', room)))
+            .delete(url)
+            .pipe(catchError(this.handleError('deleteRoom', id)))
     }
+
+    updateRoom(room: Room): Observable<any> {
+        const url = 'api/rooms/' + room.id;
+        return this.http
+            .put(url, room)
+            .pipe(catchError(this.handleError('updateRoom', room)))
+    }
+
 }

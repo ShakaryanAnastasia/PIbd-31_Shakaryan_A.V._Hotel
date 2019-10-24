@@ -1,1 +1,8 @@
-<p>rooms works!</p>
+<div id="form" *ngFor="let room of rooms">  
+        <label>{{room.title}}</label><br>      
+          <div *ngFor="let image of room.images">
+                  <img [src]="image.original" width=20% height=20%>
+          </div>         
+          <label [innerHTML]="room.description"></label><br>
+          <label>Цена номера:&nbsp;</label> <label>{{room.price}}</label><br>       
+      </div>

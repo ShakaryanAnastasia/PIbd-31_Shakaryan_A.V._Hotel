@@ -1,3 +1,28 @@
-<p>add works!</p>
-<a routerLink="/admin" routerLinkActive = "active"><button>Сохранить</button></a>
-<a routerLink="/admin" routerLinkActive = "active"><button>Назад</button></a>
+<br>
+<div id="form">  
+  <label>TITLE</label>
+  <br>
+  <input #titleV type="text" name="title" placeholder="title" [(ngModel)]="room.title">
+  <br>
+  <label>Price</label>
+  <br>
+  <input #priceV type="text" name="price" placeholder="price" [(ngModel)]="room.price">
+  <br>
+ 
+  <label>Description</label>
+  <br>
+  <ckeditor [(ngModel)]="room.description" [editor]="Editor" ></ckeditor>
+  <!-- <input #descriptionV type="text" name="description" placeholder="description" [(ngModel)]="room.description"> -->
+  <br>
+  <label>Image</label>
+  <br>
+  <div *ngFor="let image of room.images; let i=index">
+      <input #imageV type="text" name="images" placeholder="image"  [(ngModel)]=image.original>
+      <input type="button" (click)="delImage(i)" value="-">
+    </div>
+    <input type="button" (click)="addImage()" value="+">
+    <br><br>    
+  <br><br>
+  <a routerLink="/admin"><button>Назад</button></a>
+  <input type="button" (click)="createOrupdate()" value="Сохранить">
+</div>

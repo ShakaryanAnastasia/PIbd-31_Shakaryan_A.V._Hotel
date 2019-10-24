@@ -1,17 +1,31 @@
-<a routerLink="/admin/add" routerLinkActive = "active"><button>Добавить</button></a>
+<a routerLink="/admin/add" routerLinkActive = "active">
+<button>Добавить</button></a>
 <table id="d" border='1' width='50%'>
-    <tr>
-      <th>ID</th>
-      <th>TITLE</th>
-      <th>Price</th>
-      <th>Description</th>
-    </tr>
+  <tr>
+      <th></th>
+    <th id="dd" border='1'>ID</th>
+    <th id="dd" border='1'>TITLE</th>
+    <th id="dd" border='1'>Price</th>
+    <th id="dd" border='1'>Description</th>
+    <th id="dd" border='1'>Image</th>
     
-    <tr *ngFor="let room of rooms">
-      <td>{{ room.id }}</td>
-      <td>{{ room.title }}</td>
-      <td>{{ room.price }}</td>
-      <td>{{ room.description }}</td>
-    </tr>  
-  </table>
+  </tr>
+
+  <tr *ngFor="let room of rooms">
+    <td><button (click)="deleteRoom(room.id)">Delete</button>
+      <button [routerLink]="['/admin/edit/', room.id]">Update</button></td>
+    <td id="dd">{{ room.id }}</td>
+    <td id="dd">{{ room.title }}</td>
+    <td id="dd">{{ room.price }}</td>
+    <td id="dd" [innerHTML]="room.description"></td>
+    <td id="dd">
+      <div *ngFor="let image of room.images">
+        {{image.original}}
+      </div>
+    </td>
+  </tr>
+</table>
+<br>
+
+
 
