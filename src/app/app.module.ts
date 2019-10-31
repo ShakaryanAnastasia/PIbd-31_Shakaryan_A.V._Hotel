@@ -9,14 +9,17 @@ import { AppComponent } from './StartComponent/app.component';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import {RoomsService} from './admin/room.service'
+import { UserService } from './user.service';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
+import { CookieService } from 'ngx-cookie-service'
 
 import { RoomsComponent } from './rooms/rooms.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddComponent } from './admin/add/add.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { AddComponent } from './admin/add/add.component';
     HomeComponent,
     AdminComponent,
     AddComponent,
-    RoomsComponent
+    RoomsComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import { AddComponent } from './admin/add/add.component';
     HttpClientModule, 
     CKEditorModule
   ],
-  providers: [MessageService, HttpErrorHandler, RoomsService],
+  providers: [MessageService, HttpErrorHandler, RoomsService, UserService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

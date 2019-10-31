@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://iphotelbackend.herokuapp.com/api",
+        "target": "http://localhost/PIbd-31_Shakaryan_A.V._Backend/public/api",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
