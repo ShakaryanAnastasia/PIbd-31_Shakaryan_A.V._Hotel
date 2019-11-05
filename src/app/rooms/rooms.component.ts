@@ -15,6 +15,14 @@ export class RoomsComponent implements OnInit {
   ngOnInit() {
     this.roomsService.getRooms().subscribe((rooms)=>{
       this.rooms = rooms.list;
+      for (let room of rooms.list) {
+        for (let image of room.images){        
+          this.roomsService.getImage(image.original).subscribe(res => {
+            if (res.link){
+              image.original = res.link;
+            }
+          });       
+        }}  
       console.log(this.rooms);
     })
   }

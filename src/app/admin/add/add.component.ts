@@ -13,7 +13,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class AddComponent implements OnInit {
   public Editor = ClassicEditor;
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router) { }
-  room: Room = { id: null, title: null, description: null, price: null, images: [] };
+  room: Room = { id: null, title: null, description: null, price: null, images: [], images_files: [] };
 
   createOrupdate() {
     if (this.route.snapshot.data['mode'] == "edit") {
@@ -29,7 +29,10 @@ export class AddComponent implements OnInit {
     this.roomsService.updateRoom(room).subscribe(result => {
       if (result.status == '201') {
         console.log("Room updated successfully: ", result.room.title)
-      }
+        this.roomsService.addImages(room, result.room.id, 'edit').subscribe(result => {
+          console.log("Images added successfully: ", result.list)
+        });
+        }
     });
   }
 
@@ -37,6 +40,9 @@ export class AddComponent implements OnInit {
     this.roomsService.addRoom(room).subscribe(result => {
       if (result.status == '201') {
         console.log("Room added successfully: ", result.list)
+        this.roomsService.addImages(room, result.list, 'add').subscribe(result => {
+          console.log("Images added successfully: ", result.list)
+        });
       }
     });
   }
@@ -61,6 +67,11 @@ export class AddComponent implements OnInit {
       }
     });
   }
+
+  handleFileInput(files: FileList) {    
+    this.room.images_files.push(files.item(0));    
+  console.log("files ", this.room.images_files);
+}
 
   ngOnChanges(){
     this.ngOnInit();

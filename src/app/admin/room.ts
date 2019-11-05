@@ -4,6 +4,7 @@ export interface Room {
     title: string
     price: number
     images: Array<Images>
+    images_files: File[]
 }
 
 export interface Images {
