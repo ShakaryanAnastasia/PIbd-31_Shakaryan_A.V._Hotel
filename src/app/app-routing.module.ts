@@ -8,6 +8,7 @@ import { AddComponent } from './admin/add/add.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { isAuthorized } from './isAuthorized';
+import { InfoComponent } from './info/info.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent }, 
   { path: 'register', component: RegistrationComponent }, 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'info', component: InfoComponent },
   //{ path: 'rooms',  loadChildren: './rooms/rooms.module#RoomsModule' },
   { path: 'rooms',  component: RoomsComponent }
   ];

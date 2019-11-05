@@ -21,6 +21,8 @@ import { AddComponent } from './admin/add/add.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { isAuthorized } from './isAuthorized';
+import { InfoComponent } from './info/info.component';
+import { authService } from './authService';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { isAuthorized } from './isAuthorized';
     AddComponent,
     RoomsComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { isAuthorized } from './isAuthorized';
     HttpClientModule, 
     CKEditorModule
   ],
-  providers: [MessageService, HttpErrorHandler, RoomsService, UserService, CookieService, isAuthorized],
+  providers: [MessageService, HttpErrorHandler, RoomsService, UserService, CookieService, isAuthorized, authService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
