@@ -25,7 +25,7 @@ export class RoomsService{
 
    dropbox = {
     headers: new HttpHeaders({
-    'Authorization': 'Bearer K4kbUK1-PfAAAAAAAAAADGi-63fAPF2Ke4Id7T6T2sUCWXgpsa0G32HFpieiH8mh',
+    'Authorization': 'Bearer K4kbUK1-PfAAAAAAAAAAE7OW00DQJ6fMPUK5Ov_ULUHmXYAPHLdakyuENOKIY3_d',
     'Content-Type': 'application/json'
 })};
 
@@ -97,4 +97,13 @@ export class RoomsService{
             .pipe(catchError(this.handleError('getImage', <JSON>data)));
     }
 
-}
+    getResult(text: string): Observable<any>{
+        const data: any = { 
+            "text": text
+        };
+        return this.http
+        .post('api/search', <JSON>data, this.options)
+        .pipe(catchError(this.handleError('getResult', text)));
+
+    }
+}  

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from '../admin/room'
 import {RoomsService} from '../admin/room.service'
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-rooms',
@@ -9,8 +11,19 @@ import {RoomsService} from '../admin/room.service'
 })
 export class RoomsComponent implements OnInit {
 
-  constructor(private roomsService: RoomsService) { }
+  constructor(private roomsService: RoomsService) { 
+    this.observable.pipe(debounceTime(1000))
+    .subscribe(val =>{
+      this.roomsService.getResult(val).subscribe(result => {
+        console.log("res ", result.list);
+        this.rooms = result.list;
+      });
+    })
+  }
   rooms:Room[];
+
+  observable = new Subject<string>()
+  text: string;
 
   ngOnInit() {
     this.roomsService.getRooms().subscribe((rooms)=>{
@@ -27,4 +40,8 @@ export class RoomsComponent implements OnInit {
     })
   }
 
+  change(value: string){
+    this.observable.next(value);
+    console.log("dsfs: " + value);
+  }
 }
