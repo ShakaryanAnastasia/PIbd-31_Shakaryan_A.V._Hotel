@@ -1,13 +1,9 @@
 <div id="form"> 
-                <input type="text"
-                id="text" placeholder="search" [(ngModel)] = "text" (ngModelChange)="change($event)" 
-                (input)="getResult()"> 
-
-<div *ngFor="let room of rooms">  
-                      
+<input type="text" id="text" placeholder="search" [(ngModel)] = "text" (ngModelChange)="change($event)">
+<div *ngFor="let room of rooms">                      
         <label>{{room.title}}</label><br>      
           <div *ngFor="let image of room.images">
-                  <img [src]="image.original" width=20% height=20%>
+                <img [src]="image.original" width=20% height=20%>
           </div>         
           <label [innerHTML]="room.description"></label><br>
           <label>Цена номера:&nbsp;</label> <label>{{room.price}}</label><br>       
