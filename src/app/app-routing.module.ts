@@ -12,10 +12,10 @@ import { InfoComponent } from './info/info.component';
 import { WebhookComponent } from './webhook/webhook.component';
 
 const routes: Routes = [
-  { path: 'home',  component: HomeComponent },
-  { path: 'admin',  component: AdminComponent },
-  { path: 'admin/add',  component: AddComponent },
-  { path: 'admin/edit/:id', component: AddComponent , data:{mode:"edit"}},
+  { path: 'home',  component: HomeComponent},
+  { path: 'admin',  component: AdminComponent, canActivate:[isAuthorized]},
+  { path: 'admin/add',  component: AddComponent, canActivate:[isAuthorized]},
+  { path: 'admin/edit/:id', component: AddComponent , data:{mode:"edit"}, canActivate:[isAuthorized]},
   { path: 'login', component: LoginComponent }, 
   { path: 'register', component: RegistrationComponent }, 
   {path: '', redirectTo: '/home', pathMatch: 'full'},
