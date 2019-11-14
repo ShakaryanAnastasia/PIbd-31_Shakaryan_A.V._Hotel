@@ -23,6 +23,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { isAuthorized } from './isAuthorized';
 import { InfoComponent } from './info/info.component';
 import { authService } from './authService';
+import { WebhookComponent } from './webhook/webhook.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { authService } from './authService';
     RoomsComponent,
     LoginComponent,
     RegistrationComponent,
-    InfoComponent
+    InfoComponent,
+    WebhookComponent
   ],
   imports: [
     BrowserModule,

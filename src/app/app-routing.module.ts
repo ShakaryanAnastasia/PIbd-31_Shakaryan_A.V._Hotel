@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { isAuthorized } from './isAuthorized';
 import { InfoComponent } from './info/info.component';
-
+import { WebhookComponent } from './webhook/webhook.component';
 
 const routes: Routes = [
   { path: 'home',  component: HomeComponent },
@@ -21,7 +21,8 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'info', component: InfoComponent },
   //{ path: 'rooms',  loadChildren: './rooms/rooms.module#RoomsModule' },
-  { path: 'rooms',  component: RoomsComponent }
+  { path: 'rooms',  component: RoomsComponent },
+  { path: 'webhhok',  component: WebhookComponent }
   ];
 
 @NgModule({
