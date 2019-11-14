@@ -18,12 +18,26 @@ export class RoomsComponent implements OnInit {
         console.log("res ", result.list);
         this.rooms = result.list;
       });
-    })
+    });
+    this.observable_id.subscribe(val => {
+      if (this.rooms){
+        this.deleteRoom(val);
+      }
+    });
+    this.observable_room.subscribe(val =>{
+      if (this.rooms){
+        this.addRoom(val);
+      }
+    });
   }
+
   rooms:Room[];
 
   observable = new Subject<string>()
-  text: string;
+  text: string; 
+  observable_id = new Subject<Number>();
+  observable_room = new Subject<any>();
+
 
   ngOnInit() {
     this.roomsService.getRooms().subscribe((rooms)=>{
@@ -37,11 +51,46 @@ export class RoomsComponent implements OnInit {
           });       
         }}  
       console.log(this.rooms);
-    })
+
+    var socket = new WebSocket("wss://iphotelwebsocket.herokuapp.com");
+
+    let room = this.observable_room;
+    let id = this.observable_id;
+
+    socket.onmessage = function(event) {     
+      process(event.data);
+    };
+
+    function process(data){
+      if (Number(data)){
+        id.next(Number(data));
+      }
+      else {
+        room.next(JSON.parse(data));
+      }
+    };
+    });    
   }
 
   change(value: string){
     this.observable.next(value);
     console.log("dsfs: " + value);
+  }
+
+  deleteRoom(id:Number){
+    for (var i = 0; i < this.rooms.length; i++){
+      if (this.rooms[i].id == id){
+        this.rooms.splice(i, 1);
+      }
+    };
+    console.log(this.rooms);
+  }
+
+  addRoom(data:any){
+    console.log(data);
+    let room = {id: data.id, title: data.title, description: data.description, price: data.price, images: [], images_files: [] };
+    if (!(this.rooms.some(rom => rom === room))){
+    this.rooms.push(room);
+    }
   }
 }

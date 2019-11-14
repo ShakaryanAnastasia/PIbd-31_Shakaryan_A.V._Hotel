@@ -21,49 +21,49 @@ export class RoomsService{
     options = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.cookieService.get('token'))
       };
-   // link: string = 'https://iphotelbackend.herokuapp.com/';
+   link: string = 'https://iphotelbackend.herokuapp.com/';
 
    dropbox = {
     headers: new HttpHeaders({
-    'Authorization': 'Bearer K4kbUK1-PfAAAAAAAAAAE7OW00DQJ6fMPUK5Ov_ULUHmXYAPHLdakyuENOKIY3_d',
+    'Authorization': 'Bearer ' + this.cookieService.get('dropbox_token'),
     'Content-Type': 'application/json'
-})};
+    })};
 
     getRooms(): Observable<any> {
         return this.http
-           // .get(this.link + 'api/rooms')
-            .get('api/rooms', this.options)
+            .get(this.link + 'api/rooms')
+           // .get('api/rooms', this.options)
             .pipe(catchError(this.handleError('getRooms')))
     }
 
     getRoom(id: number): Observable<any> {
         const url = 'api/rooms/' + id;
         return this.http
-            //.get(this.link + url)
-            .get(url, this.options)
+            .get(this.link + url)
+           // .get(url, this.options)
             .pipe(catchError(this.handleError('getRoom', id)))
     }
 
     addRoom(room: Room): Observable<any> {
         return this.http
-            //.post(this.link + 'api/rooms', room)
-            .post('api/rooms', room, this.options)
+            .post(this.link + 'api/rooms', room)
+           // .post('api/rooms', room, this.options)
             .pipe(catchError(this.handleError('addRoom', room)));
     }
 
     deleteRoom(id: number): Observable<any> {
         const url = 'api/rooms/' + id;
         return this.http
-            //.delete(this.link + url)
-            .delete(url, this.options)
+            .delete(this.link + url)
+            //.delete(url, this.options)
             .pipe(catchError(this.handleError('deleteRoom', id)))
     }
 
     updateRoom(room: Room): Observable<any> {
         const url = 'api/rooms/' + room.id;
         return this.http
-            //.put(this.link + url, room)
-            .put(url, room, this.options)
+            .put(this.link + url, room)
+           // .put(url, room, this.options)
             .pipe(catchError(this.handleError('updateRoom', room)))
     }
 
@@ -83,7 +83,8 @@ export class RoomsService{
             formData.append('images_files_'+i, room.images_files[i]);
         }
         return this.http
-            .post('api/upload_to_dropbox', formData, this.options)
+            .post(this.link + 'api/upload_to_dropbox', formData, this.options)
+           // .post('api/upload_to_dropbox', formData, this.options)
             .pipe(catchError(this.handleError('addImages', formData)));
     }
 
@@ -102,8 +103,16 @@ export class RoomsService{
             "text": text
         };
         return this.http
-        .post('api/search', <JSON>data, this.options)
+        .post(this.link + 'api/searchby', <JSON>data, this.options)
+        //.post('api/search', <JSON>data, this.options)
         .pipe(catchError(this.handleError('getResult', text)));
 
+    }
+
+    getDT(): Observable<any>{
+        return this.http
+        //.get('api/dropbox', this.options)
+        .get(this.link + 'api/dropbox', this.options)
+        .pipe(catchError(this.handleError('getDropboxToken')));
     }
 }  
