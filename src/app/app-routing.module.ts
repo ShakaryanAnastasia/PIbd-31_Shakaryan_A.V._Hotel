@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'info', component: InfoComponent },
   //{ path: 'rooms',  loadChildren: './rooms/rooms.module#RoomsModule' },
   { path: 'rooms',  component: RoomsComponent },
-  { path: 'webhhok',  component: WebhookComponent }
+  { path: 'webhook',  component: WebhookComponent }
   ];
 
 @NgModule({
