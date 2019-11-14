@@ -31,7 +31,7 @@ export class RoomsService{
 
     getRooms(): Observable<any> {
         return this.http
-            .get(this.link + 'api/rooms')
+            .get(this.link + 'api/rooms', this.options)
            // .get('api/rooms', this.options)
             .pipe(catchError(this.handleError('getRooms')))
     }
@@ -39,14 +39,14 @@ export class RoomsService{
     getRoom(id: number): Observable<any> {
         const url = 'api/rooms/' + id;
         return this.http
-            .get(this.link + url)
+            .get(this.link + url, this.options)
            // .get(url, this.options)
             .pipe(catchError(this.handleError('getRoom', id)))
     }
 
     addRoom(room: Room): Observable<any> {
         return this.http
-            .post(this.link + 'api/rooms', room)
+            .post(this.link + 'api/rooms', room, this.options)
            // .post('api/rooms', room, this.options)
             .pipe(catchError(this.handleError('addRoom', room)));
     }
@@ -54,7 +54,7 @@ export class RoomsService{
     deleteRoom(id: number): Observable<any> {
         const url = 'api/rooms/' + id;
         return this.http
-            .delete(this.link + url)
+            .delete(this.link + url, this.options)
             //.delete(url, this.options)
             .pipe(catchError(this.handleError('deleteRoom', id)))
     }
@@ -62,7 +62,7 @@ export class RoomsService{
     updateRoom(room: Room): Observable<any> {
         const url = 'api/rooms/' + room.id;
         return this.http
-            .put(this.link + url, room)
+            .put(this.link + url, room, this.options)
            // .put(url, room, this.options)
             .pipe(catchError(this.handleError('updateRoom', room)))
     }
