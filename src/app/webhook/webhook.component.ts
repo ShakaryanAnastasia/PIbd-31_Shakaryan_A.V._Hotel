@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
+import { RoomsService } from '../admin/room.service';
 @Component({
   selector: 'app-webhook',
   templateUrl: './webhook.component.html',
@@ -7,11 +8,21 @@ import { Subject } from 'rxjs';
 })
 export class WebhookComponent implements OnInit {
 
-  constructor() { 
+  constructor(private roomsService: RoomsService) { 
     this.observable_message.subscribe(val => {
       if (this.messages){     
         this.messages.push(val);
-        console.log(this.messages);            
+        console.log(this.messages); 
+        let message = JSON.parse(val).object.body.split(',');
+        console.log(message);
+        if (message[0] == 'Комната'){
+          let d = {id: null, title: message[1], description: message[2], price: message[3], images: [], images_files: []};
+          this.roomsService.addRoom(d).subscribe(result => {
+            if (result.status == '201') {
+              console.log("Room added successfully: ", result.list);  
+              }          
+            });   
+          }            
       }
     });
   }
